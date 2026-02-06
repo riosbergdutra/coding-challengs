@@ -13,14 +13,25 @@ import static java.util.stream.Collectors.toList;
 class Result {
 
     /*
-     * Complete the 'plusMinus' function below.
+     * Complete the 'miniMaxSum' function below.
      *
      * The function accepts INTEGER_ARRAY arr as parameter.
      */
 
-    public static void plusMinus(List<Integer> arr) {
-    // Write your code here
-
+    public static void miniMaxSum(List<Integer> arr) {
+    long total = 0;
+    long min = Long.MAX_VALUE;
+    long max = Long.MIN_VALUE;
+    
+    for(int num : arr){
+        total += num;
+    }
+    for(int num : arr){
+        long currentSum = total - num;
+        min = Math.min(min, currentSum);
+        max = Math.max(max, currentSum);
+    }
+    System.out.println(min + " " + max );
     }
 
 }
@@ -29,13 +40,11 @@ public class Solution {
     public static void main(String[] args) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
-        int n = Integer.parseInt(bufferedReader.readLine().trim());
-
         List<Integer> arr = Stream.of(bufferedReader.readLine().replaceAll("\\s+$", "").split(" "))
             .map(Integer::parseInt)
             .collect(toList());
 
-        Result.plusMinus(arr);
+        Result.miniMaxSum(arr);
 
         bufferedReader.close();
     }
